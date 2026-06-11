@@ -1,0 +1,50 @@
+USE [BusinessUnitTaskManagementAppDB]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SQBusinessUnit_Insert]    Script Date: 11/06/2026 16:53:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+/* 
+   2.2 STORED PROCEDURE: INSERT RECORD 
+*/
+ALTER PROCEDURE [dbo].[sp_SQBusinessUnit_Insert]
+    @BusinessUnit VARCHAR(4),
+    @BusinessUnitName VARCHAR(50),
+    @AddressLine1 VARCHAR(40),
+    @TelephoneNumber VARCHAR(40),
+    @IsActive BIT,
+    @CreatedBy VARCHAR(40),
+    @Logo VARCHAR(200),
+    @District VARCHAR(200)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    INSERT INTO [dbo].[SQBusinessUnit] (
+        BusinessUnit, 
+        BusinessUnitName, 
+        AddressLine1, 
+        TelephoneNumber, 
+        IsActive, 
+        CreatedBy, 
+        CreatedOn, -- Calculated inside the transaction
+        Logo, 
+        District
+    )
+    VALUES (
+        @BusinessUnit,
+        @BusinessUnitName,
+        @AddressLine1,
+        @TelephoneNumber,
+        @IsActive,
+        @CreatedBy,
+        GETDATE(), 
+        @Logo,
+        @District
+    );
+
+    -- Return the assigned identity
+    SELECT SCOPE_IDENTITY() AS NewId;
+END

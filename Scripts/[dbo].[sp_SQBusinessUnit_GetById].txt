@@ -1,0 +1,29 @@
+USE [BusinessUnitTaskManagementAppDB]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SQBusinessUnit_GetById]    Script Date: 11/06/2026 16:52:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+/* 
+   2.2 STORED PROCEDURE: GET BY ID 
+*/
+ALTER PROCEDURE [dbo].[sp_SQBusinessUnit_GetById]
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+    Id,
+    BusinessUnit AS BusinessUnitCode,
+    BusinessUnitName,
+    AddressLine1,
+    TelephoneNumber,
+    IsActive,
+    CreatedBy,
+    CreatedOn,
+    Logo,
+    District
+    FROM [dbo].[SQBusinessUnit] WHERE Id = @Id;
+END

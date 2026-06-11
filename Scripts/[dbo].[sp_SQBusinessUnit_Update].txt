@@ -1,0 +1,34 @@
+USE [BusinessUnitTaskManagementAppDB]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_SQBusinessUnit_Update]    Script Date: 11/06/2026 16:53:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+/* 
+   2.2 STORED PROCEDURE: UPDATE RECORD 
+*/
+ALTER PROCEDURE [dbo].[sp_SQBusinessUnit_Update]
+    @Id INT,
+    @BusinessUnit VARCHAR(4),
+    @BusinessUnitName VARCHAR(50),
+    @AddressLine1 VARCHAR(40),
+    @TelephoneNumber VARCHAR(40),
+    @IsActive BIT,
+    @Logo VARCHAR(200),
+    @District VARCHAR(200)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE [dbo].[SQBusinessUnit]
+    SET BusinessUnit = @BusinessUnit,
+        BusinessUnitName = @BusinessUnitName,
+        AddressLine1 = @AddressLine1,
+        TelephoneNumber = @TelephoneNumber,
+        IsActive = @IsActive,
+        Logo = @Logo,
+        District = @District
+    WHERE Id = @Id;
+END
